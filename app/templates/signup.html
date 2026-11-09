@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEXUS Sign up</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/nexus.css') }}">
+</head>
+<body class="auth">
+  <div class="authcard">
+    <div class="logo"><span class="mark">✦</span> NEXUS<small>MEETING INTELLIGENCE</small></div>
+    <h1>Create account</h1>
+    <p>Start turning meetings into actions.</p>
+    {% with ms=get_flashed_messages(with_categories=true) %}{% for c, m in ms %}<div class="flash {{ c }}" role="alert">{{ m }}</div>{% endfor %}{% endwith %}
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="name">Full name</label>
+      <input id="name" name="name" autocomplete="name" maxlength="120" value="{{ (form or {}).get('name', '') }}" required>
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" autocomplete="email" maxlength="255" value="{{ (form or {}).get('email', '') }}" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" autocomplete="new-password" minlength="8" maxlength="128" required>
+      <button class="btn full" type="submit">Create account →</button>
+    </form>
+    <p class="link">Already registered? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
+  </div>
+</body>
+</html>

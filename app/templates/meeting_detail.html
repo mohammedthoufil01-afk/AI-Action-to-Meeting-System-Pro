@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block heading %}{{ meeting.title }}{% endblock %}
+{% block content %}
+<div class="cols">
+  <section class="panel">
+    <h3>Executive summary</h3>
+    <p class="summary">{{ meeting.summary }}</p>
+    <h4>Decisions</h4>
+    {% for d in decisions %}<div class="bullet">◆ {{ d }}</div>{% else %}<p class="muted">No explicit decisions detected.</p>{% endfor %}
+    <h4>Topics</h4>
+    <div>{% for t in topics %}<span class="tag">{{ t }}</span>{% endfor %}</div>
+  </section>
+  <section class="panel">
+    <h3>Ask NEXUS <span class="badge">CONTEXT-AWARE</span></h3>
+    <div id="chat" class="chat" data-meeting-id="{{ meeting.id }}" role="log" aria-live="polite">
+      <div class="bot">Ask anything about this meeting.</div>
+      {% for message in chat_history %}<div class="{{ 'user' if message.role == 'user' else 'bot' }}">{{ message.content }}</div>{% endfor %}
+    </div>
+    <div class="chatinput">
+      <input id="q" placeholder="What was assigned to Rahul?" maxlength="{{ config['MAX_CHAT_MESSAGE_CHARS'] }}" aria-label="Ask a question about this meeting" autocomplete="off">
+      <button id="send" type="button" aria-label="Send question">↑</button>
+    </div>
+  </section>
+</div>
+<section class="panel">
+  <h3>Action matrix</h3>
+  {% for t in meeting.tasks %}
+  <div class="task">
+    <span class="state {{ t.status|lower|replace(' ', '-') }}">{{ t.status }}</span>
+    <div><b>{{ t.description }}</b><small>{{ t.assignee_name }}{% if t.deadline %} · Due {{ t.deadline.strftime('%d %b %Y') }}{% endif %}</small></div>
+    <form method="post" action="{{ url_for('tasks.update_task', task_id=t.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <select name="status" data-autosubmit aria-label="Status for: {{ t.description }}">
+        <option {% if t.status == 'Pending' %}selected{% endif %}>Pending</option>
+        <option {% if t.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option {% if t.status == 'Completed' %}selected{% endif %}>Completed</option>
+      </select>
+      <noscript><button class="btn" type="submit">Save</button></noscript>
+    </form>
+  </div>
+  {% else %}
+  <p class="empty">No action items extracted.</p>
+  {% endfor %}
+</section>
+<section class="panel">
+  <h3>Transcript</h3>
+  <pre class="transcript">{{ meeting.transcript }}</pre>
+</section>
+{% endblock %}

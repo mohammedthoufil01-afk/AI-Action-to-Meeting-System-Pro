@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEXUS · {{ code }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/nexus.css') }}">
+</head>
+<body class="auth">
+  <div class="authcard errorcard">
+    <div class="logo"><span class="mark">✦</span> NEXUS<small>MEETING INTELLIGENCE</small></div>
+    <p class="code">{{ code }}</p>
+    <h1>{{ message }}</h1>
+    <p class="link"><a href="{{ url_for('dashboard.home') }}">← Back to NEXUS</a></p>
+  </div>
+</body>
+</html>

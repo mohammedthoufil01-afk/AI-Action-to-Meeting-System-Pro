@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block heading %}Analytics{% endblock %}
+{% block content %}
+<div class="cols">
+  <section class="panel">
+    <h3>Task status distribution</h3>
+    <canvas id="chart" height="280" role="img" aria-label="Bar chart of tasks by status"></canvas>
+  </section>
+  <section class="panel">
+    <h3>Execution metrics</h3>
+    <div class="bigmetric">{{ data['values'][0] }}<small>Pending</small></div>
+    <div class="bigmetric">{{ data['values'][1] }}<small>In progress</small></div>
+    <div class="bigmetric">{{ data['values'][2] }}<small>Completed</small></div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chart.umd.min.js') }}"></script>
+<script>
+NEXUS.renderChart('chart', {
+  type: 'bar',
+  data: {
+    labels: {{ data['labels']|tojson }},
+    datasets: [{ label: 'Tasks', data: {{ data['values']|tojson }}, borderRadius: 8, backgroundColor: ['#6f7b93', '#8d70ff', '#72e0b9'] }]
+  },
+  options: {
+    scales: {
+      x: { ticks: { color: '#8996ad' } },
+      y: { ticks: { color: '#8996ad', precision: 0 }, beginAtZero: true }
+    },
+    plugins: { legend: { labels: { color: '#aeb4c7' } } }
+  }
+});
+</script>
+{% endblock %}

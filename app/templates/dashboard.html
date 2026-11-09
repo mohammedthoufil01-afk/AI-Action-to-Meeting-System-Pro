@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <span class="pill">● INTELLIGENCE ENGINE ACTIVE</span>
+    <h2>From conversation<br><em>to execution.</em></h2>
+    <p>Gemini transcribes meetings. AI extracts decisions, owners, deadlines and action items. NEXUS keeps everything trackable.</p>
+    <a class="btn" href="{{ url_for('meetings.new_meeting') }}">Start analysis →</a>
+  </div>
+  <div class="reactor"><i></i><i></i><b>NEXUS</b></div>
+</section>
+<div class="metrics">
+  <div><small>MEETINGS</small><b>{{ stats.meetings }}</b></div>
+  <div><small>ACTION ITEMS</small><b>{{ stats.tasks }}</b></div>
+  <div><small>IN PROGRESS</small><b>{{ stats.progress }}</b></div>
+  <div><small>COMPLETED</small><b>{{ stats.completed }}</b></div>
+</div>
+<div class="cols">
+  <section class="panel">
+    <h3>Recent intelligence</h3>
+    {% for m in meetings %}
+    <a class="meeting" href="{{ url_for('meetings.meeting_detail', meeting_id=m.id) }}">
+      <span>◈</span>
+      <div><b>{{ m.title }}</b><small>{{ m.created_at.strftime('%d %b %Y · %I:%M %p') }}</small></div>
+      <em>{{ m.tasks|length }} actions →</em>
+    </a>
+    {% else %}
+    <p class="empty">No meetings yet.</p>
+    {% endfor %}
+  </section>
+  <section class="panel">
+    <h3>Execution pulse</h3>
+    {% if stats.tasks %}
+    <canvas id="pulse" height="220" role="img" aria-label="Doughnut chart of pending, in progress and completed tasks"></canvas>
+    {% else %}
+    <p class="empty">No action items yet.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+{% if stats.tasks %}
+<script src="{{ url_for('static', filename='js/chart.umd.min.js') }}"></script>
+<script>
+NEXUS.renderChart('pulse', {
+  type: 'doughnut',
+  data: {
+    labels: ['Pending', 'In Progress', 'Completed'],
+    datasets: [{ data: {{ [stats.pending, stats.progress, stats.completed]|tojson }}, backgroundColor: ['#6f7b93', '#8d70ff', '#72e0b9'], borderWidth: 0 }]
+  },
+  options: { plugins: { legend: { labels: { color: '#aeb9ca' } } }, cutout: '72%' }
+});
+</script>
+{% endif %}
+{% endblock %}

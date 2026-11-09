@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block heading %}Action Matrix{% endblock %}
+{% block content %}
+<section class="panel">
+  <h3>All actionable work</h3>
+  {% for t in tasks %}
+  <div class="task">
+    <span class="state {{ t.status|lower|replace(' ', '-') }}">{{ t.status }}</span>
+    <div><b>{{ t.description }}</b><small>{{ t.meeting.title }} · {{ t.assignee_name }}{% if t.deadline %} · Due {{ t.deadline.strftime('%d %b %Y') }}{% endif %}</small></div>
+    <form method="post" action="{{ url_for('tasks.update_task', task_id=t.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <select name="status" data-autosubmit aria-label="Status for: {{ t.description }}">
+        <option {% if t.status == 'Pending' %}selected{% endif %}>Pending</option>
+        <option {% if t.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option {% if t.status == 'Completed' %}selected{% endif %}>Completed</option>
+      </select>
+      <noscript><button class="btn" type="submit">Save</button></noscript>
+    </form>
+  </div>
+  {% else %}
+  <p class="empty">No tasks yet.</p>
+  {% endfor %}
+  {% if pagination.pages > 1 %}
+  <nav class="pager" aria-label="Task pages">
+    {% if pagination.has_prev %}<a href="{{ url_for('tasks.list_tasks', page=pagination.prev_num) }}">← Newer</a>{% else %}<span></span>{% endif %}
+    <span>Page {{ pagination.page }} of {{ pagination.pages }}</span>
+    {% if pagination.has_next %}<a href="{{ url_for('tasks.list_tasks', page=pagination.next_num) }}">Older →</a>{% else %}<span></span>{% endif %}
+  </nav>
+  {% endif %}
+</section>
+{% endblock %}

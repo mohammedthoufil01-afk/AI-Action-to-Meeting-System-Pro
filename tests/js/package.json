@@ -1,0 +1,6 @@
+{
+  "name": "nexus-frontend-tests",
+  "private": true,
+  "description": "Optional JavaScript behaviour tests (run by tests/test_frontend.py when node_modules exists)",
+  "devDependencies": { "jsdom": "^26.0.0" }
+}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{% block title %}NEXUS AI{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/nexus.css') }}">
+</head>
+<body>
+  <aside class="side">
+    <div class="logo"><span class="mark">✦</span> <span class="name">NEXUS</span><small>MEETING INTELLIGENCE</small></div>
+    <div class="online">● AI CORE ONLINE</div>
+    <nav aria-label="Main navigation">
+      <a href="{{ url_for('dashboard.dashboard') }}" title="Command Center"><span aria-hidden="true">⌂</span> <span class="lbl">Command Center</span></a>
+      <a href="{{ url_for('meetings.new_meeting') }}" title="New Meeting"><span aria-hidden="true">＋</span> <span class="lbl">New Meeting</span></a>
+      <a href="{{ url_for('tasks.list_tasks') }}" title="Action Matrix"><span aria-hidden="true">✓</span> <span class="lbl">Action Matrix</span></a>
+      <a href="{{ url_for('analytics.analytics') }}" title="Analytics"><span aria-hidden="true">◫</span> <span class="lbl">Analytics</span></a>
+    </nav>
+    <div class="sidefoot">
+      <b>{{ current_user.name }}</b>
+      <small>{{ current_user.email }}</small>
+      <form method="post" action="{{ url_for('auth.logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" aria-label="Sign out"><span class="lbl">Sign out </span>↗</button>
+      </form>
+    </div>
+  </aside>
+  <main class="main">
+    <header>
+      <div><small>AI MEETING-TO-ACTION SYSTEM</small><h1>{% block heading %}Command Center{% endblock %}</h1></div>
+      <a class="btn" href="{{ url_for('meetings.new_meeting') }}">＋ Analyze meeting</a>
+    </header>
+    {% with ms=get_flashed_messages(with_categories=true) %}{% for c, m in ms %}<div class="flash {{ c }}" role="alert">{{ m }}</div>{% endfor %}{% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <script src="{{ url_for('static', filename='js/nexus.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

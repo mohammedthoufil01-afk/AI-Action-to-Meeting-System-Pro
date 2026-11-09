@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block heading %}Meeting Intelligence{% endblock %}
+{% block content %}
+<div class="cols">
+  <section class="panel">
+    <h3>Capture meeting <span class="badge">GEMINI AI</span></h3>
+    <form id="meeting-form" method="post" enctype="multipart/form-data" data-max-audio-mb="{{ config['MAX_AUDIO_MB'] }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="title">Meeting title</label>
+      <input id="title" name="title" maxlength="200" required placeholder="Project Alpha — Weekly Sync" value="{{ (form or {}).get('title', '') }}">
+      <label for="audio">Audio recording</label>
+      <div class="drop">
+        <input id="audio" type="file" name="audio" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.flac,.aiff,.webm,.mp4">
+        <b>Choose or drop audio</b>
+        <small>mp3 · wav · m4a · mp4 · webm</small>
+        <span>Gemini converts speech into a transcript (up to {{ config['MAX_AUDIO_MB'] }} MB).</span>
+      </div>
+      <label for="transcript">Or paste transcript</label>
+      <textarea id="transcript" name="transcript" rows="12" placeholder="Paste a transcript if you already have one...">{{ (form or {}).get('transcript', '') }}</textarea>
+      <button class="btn full" type="submit">Run AI analysis ✦</button>
+    </form>
+  </section>
+  <section class="panel">
+    <h3>AI pipeline</h3>
+    <div class="pipe">01 · Speech → text<small>Gemini transcription</small></div>
+    <div class="pipe">02 · Understand<small>LLM semantic analysis</small></div>
+    <div class="pipe">03 · Structure<small>Tasks + decisions + topics</small></div>
+    <div class="pipe">04 · Execute<small>Track + remind + chat</small></div>
+  </section>
+</div>
+{% endblock %}

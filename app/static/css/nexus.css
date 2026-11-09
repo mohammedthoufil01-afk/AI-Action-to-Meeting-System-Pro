@@ -1,0 +1,129 @@
+*{box-sizing:border-box}
+body{margin:0;background:#060811;color:#e8edf7;font-family:Inter,Arial,sans-serif}
+.side{position:fixed;inset:0 auto 0 0;width:255px;background:#080b14;border-right:1px solid #182035;padding:28px 18px}
+.logo{font-size:20px;font-weight:800;letter-spacing:2px;margin:0 10px 28px;color:#f0f2f8}
+.logo small{display:block;font-size:7px;color:#69758c;letter-spacing:2px;margin-top:5px}
+.online{font-size:9px;color:#75829a;margin:0 10px 30px;letter-spacing:1px}
+.online:first-letter{color:#72e0b9}
+nav a{display:block;padding:13px 12px;color:#7f8ba2;text-decoration:none;border-radius:9px;font-size:12px;margin:3px 0}
+nav a:hover{background:#101628;color:#fff}
+.sidefoot{position:absolute;bottom:25px;left:28px;font-size:10px}
+.sidefoot b,.sidefoot small,.sidefoot a{display:block}
+.sidefoot small{color:#59657c;margin-top:4px}
+.sidefoot a{color:#7f8ba2;text-decoration:none;margin-top:14px}
+.main{margin-left:255px;padding:31px 45px 60px;min-height:100vh}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+header small{font-size:9px;color:#64718a;letter-spacing:2px}
+h1{font-size:26px;margin:6px 0}
+.btn{display:inline-block;background:linear-gradient(135deg,#7454ff,#a65bff);border:0;border-radius:9px;padding:12px 17px;color:#fff;text-decoration:none;font-size:11px;font-weight:700;cursor:pointer;box-shadow:0 10px 35px #714eff2a}
+.full{width:100%;margin-top:15px}
+.flash{padding:12px 15px;border-radius:8px;margin-bottom:14px;font-size:11px}
+.flash.error{background:#3a1b27;color:#f4b1c1}
+.hero{border:1px solid #202a42;border-radius:17px;min-height:315px;padding:45px 50px;background:radial-gradient(circle at 78% 45%,#704fff1c,transparent 25%),#0a0f19;display:flex;justify-content:space-between;align-items:center}
+.pill,.badge{display:inline-block;border:1px solid #7659e655;background:#7659e610;color:#a891ff;padding:7px 10px;border-radius:20px;font-size:8px;letter-spacing:1.5px}
+.hero h2{font-size:43px;line-height:1.05;margin:17px 0}
+.hero em{color:#a77cff;font-style:normal}
+.hero p{color:#7e8ba3;max-width:590px;font-size:13px;line-height:1.7}
+.reactor{width:240px;height:240px;border:1px solid #7659e633;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 70px #754fff25;position:relative}
+.reactor i{position:absolute;border:1px dashed #8d70ff55;border-radius:50%;inset:30px}
+.reactor i:nth-child(2){inset:58px}
+.reactor b{font-size:11px;letter-spacing:2px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:17px 0}
+.metrics div{padding:19px;background:#0a0f19;border:1px solid #1b2539;border-radius:12px}
+.metrics small{display:block;color:#626e85;font-size:8px;letter-spacing:1.4px}
+.metrics b{font-size:28px;display:block;margin-top:7px}
+.cols{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+.panel{background:#0a0f19;border:1px solid #1b2539;border-radius:13px;padding:21px;margin-top:16px}
+.panel h3{font-size:14px;margin:0 0 18px}
+.meeting{display:flex;gap:12px;align-items:center;padding:14px 3px;border-top:1px solid #182237;color:inherit;text-decoration:none}
+.meeting div{flex:1}
+.meeting b{display:block;font-size:11px}
+.meeting small,.task small{display:block;color:#606d84;font-size:9px;margin-top:5px}
+.meeting em{font-style:normal;font-size:9px;color:#66738a}
+.empty,.muted{padding:25px;text-align:center;color:#66738a;font-size:11px}
+.panel label{display:block;color:#9aa6bb;font-size:10px;margin:16px 0 7px}
+.panel input,.panel textarea,.panel select,.chatinput input{width:100%;background:#070c15;border:1px solid #202b41;color:#e7ecf5;border-radius:8px;padding:11px;font:inherit;font-size:11px}
+.panel textarea{resize:vertical}
+.drop{border:1px dashed #35415b;padding:27px;text-align:center;border-radius:10px;position:relative}
+.drop input{position:absolute;inset:0;opacity:0}
+.drop b,.drop small,.drop span{display:block}
+.drop b{font-size:12px}
+.drop small{color:#6b7790;margin:7px}
+.drop span{font-size:9px;color:#536078}
+.pipe{padding:18px 4px;border-bottom:1px solid #192237;font-size:11px}
+.pipe small{display:block;color:#5f6c84;margin:6px 0 0 35px}
+.summary{font-size:13px;line-height:1.8;color:#aeb8c9}
+.panel h4{font-size:10px;color:#6d7890;letter-spacing:1px;text-transform:uppercase;margin:23px 0 9px}
+.bullet{padding:9px 0;color:#a4afc1;border-bottom:1px solid #182237;font-size:11px}
+.tag{display:inline-block;padding:7px 9px;background:#12182a;border:1px solid #242f47;color:#8895ad;border-radius:20px;font-size:9px;margin:3px}
+.task{display:flex;align-items:center;gap:13px;border-top:1px solid #182237;padding:14px 3px}
+.task>div{flex:1}
+.state{font-size:8px;border-radius:20px;padding:7px 9px;background:#171d2b;color:#9ba7bb;min-width:75px;text-align:center}
+.in-progress{color:#bca8ff;background:#251c43}
+.completed{color:#9fe0c3;background:#16342a}
+.task select{width:120px;padding:8px;font-size:9px}
+.transcript{white-space:pre-wrap;background:#070c15;border-radius:8px;padding:16px;color:#79859b;font:11px/1.7 Inter;max-height:350px;overflow:auto}
+.chat{min-height:420px}
+.chat{display:flex;flex-direction:column}
+.chat>h3{flex:none}
+#chat{height:280px;overflow:auto;background:#070c15;border-radius:8px;padding:10px}
+.bot,.user{max-width:90%;padding:9px 10px;border-radius:10px;margin:7px 0;font-size:10px;line-height:1.6}
+.bot{background:#11182a;color:#aeb9cc}
+.user{background:#6d4df5;margin-left:auto}
+.chatinput{display:flex;gap:7px;margin-top:9px}
+.chatinput input{flex:1}
+.chatinput button{width:42px;border:0;border-radius:8px;background:#7858ff;color:#fff}
+.bigmetric{padding:20px 3px;border-bottom:1px solid #192237;font-size:30px}
+.bigmetric small{display:block;font-size:9px;color:#68748b}
+.auth{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 20%,#5d43aa20,transparent 30%),#060811}
+.authcard{width:390px;background:#0a0f19;border:1px solid #202a40;border-radius:16px;padding:35px}
+.authcard h1{font-size:23px}
+.authcard p{font-size:11px;color:#68748c}
+.authcard label{display:block;font-size:10px;color:#98a4b8;margin:14px 0 7px}
+.authcard input{width:100%;padding:11px;background:#070c15;border:1px solid #202b41;border-radius:8px;color:#fff}
+.link{text-align:center;margin-top:18px}
+.link a{color:#a891ff;text-decoration:none}
+
+/* ---- accessibility and small usability additions ---- */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #a891ff;outline-offset:2px}
+.flash.success{background:#14301f;color:#a6e3c3}
+.flash.info{background:#1a2440;color:#b9c6f5}
+.btn[disabled],.chatinput button[disabled]{opacity:.6;cursor:wait}
+.sidefoot form{margin:0}
+.sidefoot button{display:block;background:none;border:0;padding:0;margin-top:14px;color:#7f8ba2;font:inherit;cursor:pointer}
+.sidefoot button:hover{color:#fff}
+.bot,.user{white-space:pre-wrap;overflow-wrap:anywhere}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:16px;color:#66738a;font-size:10px}
+.pager a{color:#a891ff;text-decoration:none}
+.formhelp{display:block;color:#536078;font-size:9px;margin-top:6px}
+.errorcard{text-align:center}
+.errorcard .code{font-size:46px;font-weight:800;color:#a77cff;margin:0}
+.authcard{max-width:100%}
+.panel{overflow-wrap:anywhere}
+
+/* ---- responsive layout ---- */
+@media(max-width:900px){
+.side{width:70px;padding:24px 8px}
+.side .logo{margin:0 0 20px;text-align:center}
+.side .logo .name,.side .logo small,.online,nav a .lbl,.sidefoot b,.sidefoot small,.sidefoot .lbl{display:none}
+.side .logo .mark{font-size:22px}
+nav a{text-align:center;font-size:16px;padding:13px 6px}
+.sidefoot{left:0;right:0;text-align:center}
+.sidefoot button{margin:0 auto;font-size:16px}
+.main{margin-left:70px;padding:22px}
+.hero{padding:30px}
+.reactor{display:none}
+.metrics{grid-template-columns:repeat(2,1fr)}
+.cols{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.main{margin-left:70px;padding:16px 12px 40px}
+header{flex-direction:column;align-items:flex-start;gap:12px}
+.hero{padding:22px;min-height:0}
+.hero h2{font-size:30px}
+.task{flex-wrap:wrap}
+.task select{width:100%}
+.authcard{padding:26px 20px}
+}
+
